@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>طارق فضل الفضل — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-base: #0A0B12;
+      --bg-surface: #10111C;
+      --bg-card: #13152A;
+      --bg-card-hover: #171A30;
+      --accent-gold: #C8A96E;
+      --accent-gold-dim: rgba(200, 169, 110, 0.12);
+      --accent-blue: #4A84D4;
+      --accent-blue-dim: rgba(74, 132, 212, 0.10);
+      --text-primary: #EDF0F7;
+      --text-secondary: #7A84A0;
+      --text-muted: #4A5268;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(200, 169, 110, 0.25);
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+    }
+
+    /* ──────────────── NAV ──────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      height: 64px;
+      background: rgba(10, 11, 18, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      transition: background 0.3s;
+    }
+
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* ──────────────── HERO ──────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 169, 110, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 169, 110, 0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      z-index: 0;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(200, 169, 110, 0.07) 0%, transparent 70%);
+      top: 50%;
+      right: 20%;
+      transform: translate(50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      text-align: right;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-gold-dim);
+      border: 1px solid var(--border-accent);
+      color: var(--accent-gold);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+
+    .hero-badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-name {
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero-name .accent {
+      color: var(--accent-gold);
+    }
+
+    .hero-tagline {
+      font-size: clamp(16px, 2.2vw, 22px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.35s forwards;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.9;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s forwards;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.65s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-gold);
+      color: #0A0B12;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      padding: 12px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(200, 169, 110, 0.25);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
+      padding: 11px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .hero-stats {
+      margin-top: 72px;
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.8s forwards;
+    }
+
+    .stat-item {}
+
+    .stat-num {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ──────────────── SECTION COMMON ──────────────── */
+    section {
+      padding: 100px 5%;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 60px;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+      margin: 16px 0 40px;
+    }
+
+    /* ──────────────── SKILLS ──────────────── */
+    #skills {
+      background: var(--bg-surface);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .skill-category:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+    }
+
+    .skill-category:hover::before {
+      opacity: 1;
+    }
+
+    .skill-cat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .skill-cat-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: var(--accent-gold-dim);
+      color: var(--accent-gold);
+      border-color: var(--border-accent);
+    }
+
+    /* ──────────────── HIGHLIGHTS ──────────────── */
+    #highlights {
+      background: var(--bg-base);
+    }
+
+    .timeline {
+      position: relative;
+      padding-right: 40px;
+      max-width: 800px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent-gold), rgba(200, 169, 110, 0.1));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 52px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      right: -47px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: var(--accent-gold);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.15);
+    }
+
+    .timeline-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      background: var(--accent-gold-dim);
+      border: 1px solid var(--border-accent);
+      padding: 3px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .timeline-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ──────────────── PROJECTS ──────────────── */
+    #projects {
+      background: var(--bg-surface);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .thumb-icon {
+      font-size: 36px;
+      opacity: 0.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card:hover .project-thumb .thumb-icon {
+      transform: scale(1.1);
+      transition: transform 0.3s;
+    }
+
+    .project-body {
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .project-type-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin-bottom: 8px;
+    }
+
+    .project-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 18px;
+    }
+
+    .project-tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .tech-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(74, 132, 212, 0.10);
+      color: var(--accent-blue);
+      border: 1px solid rgba(74, 132, 212, 0.2);
+    }
+
+    .btn-visit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 10px 0;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .btn-visit:hover {
+      background: var(--accent-gold-dim);
+      border-color: var(--border-accent);
+      color: var(--accent-gold);
+    }
+
+    .btn-visit svg {
+      transition: transform 0.2s;
+    }
+
+    .btn-visit:hover svg {
+      transform: translateX(-3px);
+    }
+
+    /* ──────────────── CONTACT ──────────────── */
+    #contact {
+      background: var(--bg-base);
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: 20px;
+      padding: 60px;
+      max-width: 700px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(200, 169, 110, 0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .contact-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      max-width: 440px;
+      position: relative;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      position: relative;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      background: var(--accent-gold-dim);
+    }
+
+    /* ──────────────── FOOTER ──────────────── */
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 24px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    /* ──────────────── ANIMATIONS ──────────────── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+    }
+
+    @keyframes scroll-indicator {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(6px);
+        opacity: 0.4;
+      }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      animation: fadeUp 0.6s 1.2s forwards;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-left: 1.5px solid var(--text-muted);
+      border-bottom: 1.5px solid var(--text-muted);
+      transform: rotate(-45deg);
+      animation: scroll-indicator 1.8s ease-in-out infinite;
+    }
+
+    /* ──────────────── RESPONSIVE ──────────────── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 4%;
+      }
+
+      .nav-links {
+        gap: 18px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+      }
+
+      section {
+        padding: 80px 4%;
+      }
+
+      .hero-stats {
+        gap: 28px;
+      }
+
+      .contact-card {
+        padding: 36px 24px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* يضمن تعبئة المساحة بالكامل بشكل متناسق ودون تشويه الصورة */
+      transition: transform 0.4s ease;
+      /* يضيف حركة انسيابية ناعمة */
+    }
+
+    /* تأثير تكبير الصورة قليلاً عند تمرير الفأرة فوق بطاقة المشروع */
+    .project-card:hover .project-thumb img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ░░░ NAV ░░░ -->
+  <nav id="main-nav">
+    <a href="#hero" class="nav-brand">TF</a>
+    <ul class="nav-links">
+      <li><a href="#skills">المهارات</a></li>
+      <li><a href="#highlights">المشاركات </a></li>
+      <li><a href="#projects">المشاريع</a></li>
+      <li><a href="#contact">تواصل</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ░░░ HERO ░░░ -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span></span>
+        يشرفني التعاون معك
+      </div>
+
+      <h1 class="hero-name">
+        طارق فضل<br><span class="accent">الفضل</span>
+      </h1>
+
+      <p class="hero-tagline">
+        مطوّر Full-Stack · ذكاء اصطناعي وتعلّم آلي · نُظم المعلومات الإدارية والمالية
+      </p>
+
+      <p class="hero-desc">طالب جامعي في تخصص نظم المعلومات الادارية ,
+        أجمع بين تخصص نُظم المعلومات الإدارية وعالم الذكاء الاصطناعي وتطوير الويب بهدف بناء حلول رقمية متكاملة تُحوّل
+        العمليات التجارية والمالية إلى تجارب ذكية وفعّالة. متعلم في أكاديمية KAUST stage 2 للذكاء الاصطناعي
+        .
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#projects" class="btn-primary">استعرض المشاريع ←</a>
+        <a href="#contact" class="btn-ghost">تواصل معي</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">13+</div>
+          <div class="stat-label">مشروع منشور</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-num">3+</div>
+          <div class="stat-label"> مسارات خضت فيها تعليم ذاتي </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+
+  <!-- ░░░ SKILLS ░░░ -->
+  <section id="skills">
+    <div class="section-label">الكفاءات والأدوات</div>
+    <h2 class="section-title">مجالات التخصص</h2>
+    <div class="divider"></div>
+    <p class="section-sub">مهارات متكاملة تغطي الذكاء الاصطناعي، وتطوير الويب الشامل، والتحليل المالي الاستراتيجي.</p>
+
+    <div class="skills-grid">
+
+      <!-- AI & Data -->
+      <div class="skill-category">
+        <div class="skill-cat-icon">🤖</div>
+        <div class="skill-cat-title">الذكاء الاصطناعي والبيانات</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LLMs</span>
+          <span class="skill-tag">RAG</span>
+          <span class="skill-tag">Fine-tuning</span>
+          <span class="skill-tag">Gemma</span>
+          <span class="skill-tag">Qwen</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">HuggingFace</span>
+          <span class="skill-tag">KAUST AI Academy</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Ollama</span>
+          <span class="skill-tag">Machine Learning</span>
+        </div>
+      </div>
+
+      <!-- Full-Stack -->
+      <div class="skill-category">
+        <div class="skill-cat-icon">💻</div>
+        <div class="skill-cat-title">تطوير الويب Full-Stack</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Streamlit</span>
+          <span class="skill-tag">Vercel</span>
+          <span class="skill-tag">GitHub Pages</span>
+        </div>
+      </div>
+
+      <!-- Business & Finance -->
+      <div class="skill-category">
+        <div class="skill-cat-icon">📊</div>
+        <div class="skill-cat-title">الأعمال والتمويل</div>
+        <div class="skill-tags">
+          <span class="skill-tag">التحليل المالي CVP</span>
+          <span class="skill-tag">إدارة العمليات</span>
+          <span class="skill-tag">سوق تداول</span>
+          <span class="skill-tag">مفاهيم CME-1A</span>
+          <span class="skill-tag">نظم المعلومات MIS</span>
+          <span class="skill-tag">تحليل المخاطر الائتمانية</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ░░░ HIGHLIGHTS ░░░ -->
+  <section id="highlights">
+    <div class="section-label">المشاراكات</div>
+    <h2 class="section-title">أبرز المحطات</h2>
+    <div class="divider"></div>
+    <p class="section-sub">مسيرة حافلة بالمشاركات والجوائز في بيئة التقنية والأعمال السعودية.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-badge"> مشارك </span>
+          <span class="timeline-date">هاكاثون أبشر </span>
+        </div>
+        <div class="timeline-title">مساعد أبشر الذكي — منصة Chatbot تفاعلية</div>
+        <p class="timeline-desc">منصة Chatbot ذكية تساعد المستخدمين في الحصول على معلومات دقيقة وشاملة حول خدمات منصة
+          أبشر الحكومية، مع إرشادات مبسطة وتوجيهات فورية باللغة العربية لتسهيل تصفح الخدمات والاستفادة منها.</p>
+      </div>
+
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-badge">🌾 هاكاثون جادة</span>
+          <span class="timeline-date">FinTech زراعي</span>
+        </div>
+        <div class="timeline-title">منصة نمو — تسجيل ائتماني ذكي للمزارعين</div>
+        <p class="timeline-desc">نموذج ائتماني مبني على الذكاء الاصطناعي يُقيّم الجدارة الائتمانية للمزارعين بناءً على
+          بيانات المواسم والإنتاج الزراعي، بهدف تسهيل وصولهم للتمويل. تقديم في هاكاثون جادة-ثون.</p>
+      </div>
+
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-badge">🤖 وكيل ذكي</span>
+          <span class="timeline-date">منتج مستقل</span>
+        </div>
+        <div class="timeline-title">ميداد — وكيل ذكاء اصطناعي للمنصات الرقمية</div>
+        <p class="timeline-desc">وكيل AI متكامل يساعد مديري المنصات الرقمية في أتمتة المهام، تحليل المحتوى، وإنجاز
+          العمليات التشغيلية بكفاءة عالية باستخدام تقنيات اللغات الكبيرة LLMs.</p>
+      </div>
+
+      <div class="timeline-item" data-reveal>
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-badge">🎓 شهادة</span>
+          <span class="timeline-date">أكاديمية KAUST</span>
+        </div>
+        <div class="timeline-title"> أكاديمية KAUST للذكاء الاصطناعي Stage 2 </div>
+        <p class="timeline-desc">إتمام برنامج أكاديمية الملك عبدالله للعلوم والتقنية KAUST في مجال الذكاء الاصطناعي، مع
+          تطبيقات عملية في التعلم الآلي ومعالجة اللغات الطبيعية , </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ░░░ PROJECTS ░░░ -->
+  <section id="projects">
+    <div class="section-label">معرض الأعمال</div>
+    <h2 class="section-title">المشاريع المنشورة</h2>
+    <div class="divider"></div>
+    <p class="section-sub">مجموعة متنوعة من المشاريع الحيّة تعكس عمق التخصص في الذكاء الاصطناعي وتطوير الويب.</p>
+
+    <div class="projects-grid">
+
+      <!-- 1 -->
+      <div class="project-card">
+        <div class="project-thumb" style="background: linear-gradient(135deg, #001A1A 0%, #003D3D 100%);">
+          <img src="img/lamma.png" alt="لعبة لمّة">
+        </div>
+        <div class="project-body">
+          <div class="project-type-badge">Game · Entertainment</div>
+          <div class="project-title">لعبة لمّة</div>
+          <p class="project-desc">لعبة جماعية ترفيهية مستوحاة من التراث الاجتماعي السعودي، مُصمَّمة للعب المجموعات مع
+            محتوى ثقافي وترفيهي جذّاب.</p>
+          <div class="project-tech-tags">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Socket.io</span>
+            <span class="tech-tag">Render</span>
+          </div>
+          <a href="https://lamma-game.onrender.com/" target="_blank" class="btn-visit">
+            زيارة المشروع ←
+          </a>
+        </div>
+      </div>
+
+
+
+        <!-- 11 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #001408 0%, #003018 100%);">
+            <img src="img/numu_farm.jpg" alt="">
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">AgriTech · FinTech</div>
+            <div class="project-title">منصة نمو الزراعية</div>
+            <p class="project-desc">سوق رقمي لتأجير معدات الزراعة لمزارعي منطقة القصيم، مع نظام ائتمان ذكي ومدفوعات
+              رقمية
+              تُوفّر وصولًا عادلًا للتمويل.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">AI Scoring</span>
+            </div>
+            <a href="https://numu-farm.vercel.app/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #0F1B2D 0%, #1A2F4A 100%);">
+            <img src="img/credit-risk-system.png" alt="نظام تقييم المخاطر الائتمانية الذكي">
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">FinTech · AI</div>
+            <div class="project-title">نظام تقييم المخاطر الائتمانية الذكي</div>
+            <p class="project-desc">منصة ويب تحلّل البيانات المالية للعملاء وتُقدّم تقييمًا ائتمانيًا دقيقًا باستخدام
+              خوارزميات التعلم الآلي، مع واجهة مرئية احترافية.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">ML</span>
+              <span class="tech-tag">Random Forest</span>
+            </div>
+            <a href="https://tegnh.github.io/Smart-Credit-Risk-System/index.html" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #0D1F0F 0%, #1A3D1E 100%);">
+            <img src="img/absher-helper.jpg" alt="">
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">Government AI</div>
+            <div class="project-title">مساعد أبشر الذكي</div>
+            <p class="project-desc">مساعد ذكاء اصطناعي يُسهّل على المواطنين والمقيمين التنقل في خدمات منصة أبشر
+              الحكومية،
+              مع إجابات فورية وتوجيهات دقيقة باللغة العربية.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">LLM</span>
+              <span class="tech-tag">Arabic NLP</span>
+            </div>
+            <a href="https://absher-ai-helper.vercel.app/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #1C1400 0%, #3A2A00 100%);">
+            <img src="img/finacccomp.jpg" alt="">
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">Finance · Education</div>
+            <div class="project-title"> موقع يعرض ثلاث مقررات للمستوى الثالث </div>
+            <p class="project-desc"> وهي المحاسبة الادارية ومبادئ التمويل ومقدمة في تطبيقات الحاسب </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">HTML/CSS</span>
+              <span class="tech-tag">Finance</span>
+            </div>
+            <a href="https://tegnh.github.io/FinAccComp1/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #1A0A00 0%, #3D1A00 100%);">
+            <img src="img/honey_store.jpg" alt="">
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">E-Commerce</div>
+            <div class="project-title">متجر العسل الإلكتروني</div>
+            <p class="project-desc">متجر إلكتروني متكامل لبيع منتجات العسل الطبيعي مع واجهة مستخدم أنيقة، نظام عرض
+              منتجات،
+              وتجربة تسوق سلسة , ويعرض فوائد العسل وكيفية استخراج العسل </p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+            <a href="https://tegnh.github.io/HoneyStore-1-/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #001A14 0%, #003828 100%);">
+            <div class="thumb-icon">🩺</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">HealthTech · AI</div>
+            <div class="project-title">دليل الصحة الذكي</div>
+            <p class="project-desc">منصة صحية مدعومة بالذكاء الاصطناعي تُقدّم إرشادات طبية شخصية، تحليل الأعراض،
+              ومعلومات
+              صحية موثوقة باللغة العربية.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">AI</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Health API</span>
+            </div>
+            <a href="https://tegnh.github.io/web_YourGuidToHealth_copilot/index.html" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #12001A 0%, #280038 100%);">
+            <div class="thumb-icon">🤖</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">AI Agent · Platform</div>
+            <div class="project-title">ميداد — وكيل ذكاء اصطناعي</div>
+            <p class="project-desc">وكيل AI متكامل مُصمَّم لأتمتة المهام التشغيلية في المنصات الرقمية، باستخدام نماذج
+              لغوية كبيرة مع دعم كامل للغة العربية.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">LLM</span>
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">Supabase</span>
+            </div>
+            <a href="https://midad-o5zq.vercel.app/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #001520 0%, #00304A 100%);">
+            <div class="thumb-icon">📈</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">FinTech · AI · Streamlit</div>
+            <div class="project-title">تطبيق الاقتصاد والمالية بالذكاء الاصطناعي</div>
+            <p class="project-desc">تطبيق Streamlit متكامل يُقدّم تحليلات اقتصادية ومالية مدعومة بالذكاء الاصطناعي، مع
+              رسوم بيانية تفاعلية ونماذج تنبؤية.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">AI/ML</span>
+            </div>
+            <a href="https://tegnh-fin-acc-eco-withai-app-d4abev.streamlit.app/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #1A1000 0%, #3D2800 100%);">
+            <div class="thumb-icon">🔤</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">EdTech · Game</div>
+            <div class="project-title">لعبة حروف التعليمية</div>
+            <p class="project-desc">لعبة تعليمية تفاعلية تُعزّز تعلّم الحروف العربية للأطفال من خلال آليات لعب ممتعة،
+              تحديات مستوى متصاعدة، ونظام مكافآت.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">HTML5 Canvas</span>
+              <span class="tech-tag">Arabic</span>
+            </div>
+            <a href="https://tegnh.github.io/Horoof-Test_Game/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+
+
+        <!-- 10 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #0A0A1E 0%, #18183D 100%);">
+            <div class="thumb-icon">✅</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">Productivity · SaaS</div>
+            <div class="project-title">لوحة إدارة المهام</div>
+            <p class="project-desc">تطبيق إدارة مهام احترافي بلوحة تحكم ذكية، يدعم التنظيم بالمشاريع والأولويات، مع
+              تصميم
+              نظيف وسهل الاستخدام.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Vercel</span>
+            </div>
+            <a href="https://task-manger-psi-mocha.vercel.app/dashboard" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+
+
+        <!-- 12 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #1A0012 0%, #3D0028 100%);">
+            <div class="thumb-icon">💳</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">FinTech · Machine Learning</div>
+            <div class="project-title">نظام تحليل المخاطر الائتمانية</div>
+            <p class="project-desc">تطبيق ويب متقدم يستخدم Random Forest لتصنيف المخاطر الائتمانية، مع واجهة مستخدم
+              تفاعلية لإدخال البيانات وعرض النتائج.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">Render</span>
+            </div>
+            <a href="https://credit-risk-web.onrender.com/" target="_blank" class="btn-visit">
+              زيارة المشروع ←
+            </a>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="project-card">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #0D1520 0%, #1A2F45 100%);">
+            <div class="thumb-icon">🧠</div>
+          </div>
+          <div class="project-body">
+            <div class="project-type-badge">Research · LLM · Colab</div>
+            <div class="project-title">دفتر بحث الذكاء الاصطناعي والنماذج اللغوية</div>
+            <p class="project-desc">دفتر Google Colab يُوثّق تجارب ضبط نماذج LLM الدقيق، تنفيذ RAG، واستكشاف بنيات
+              المحوّلات على بيانات عربية.</p>
+            <div class="project-tech-tags">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">HuggingFace</span>
+              <span class="tech-tag">Colab</span>
+            </div>
+            <a href="https://colab.research.google.com/drive/19eASp10hEqGmLmoU_WrshUaoiEFEFFKD" target="_blank"
+              class="btn-visit">
+              فتح الدفتر ←
+            </a>
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+
+  <!-- ░░░ CONTACT ░░░ -->
+  <section id="contact">
+    <div class="section-label">التواصل</div>
+    <h2 class="section-title">هل لديك مشروع؟</h2>
+    <div class="divider"></div>
+
+    <div class="contact-card">
+      <h3 class="contact-title">لنبني شيئًا رائعًا معًا</h3>
+      <p class="contact-sub">مفتوح لفرص التعاون، التدريب الصيفي، والمشاريع المستقلة في مجالات الذكاء الاصطناعي، تطوير
+        الويب، أو FinTech.</p>
+
+      <div class="contact-links">
+        <a href="mailto:tariqfadhel@example.com" class="contact-link">
+          ✉️ &nbsp; البريد الإلكتروني
+        </a>
+        <a href="https://github.com/tegnh" target="_blank" class="contact-link">
+          🐙 &nbsp; GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/tarig-fdl-7a6599348/" target="_blank" class="contact-link">
+          💼 &nbsp; LinkedIn
+        </a>
+        <a href="https://x.com/6ar_t" target="_blank" class="contact-link">
+          🐦 &nbsp; X / Twitter
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ░░░ FOOTER ░░░ -->
+  <footer>
+    <p> طارق فضل الفضل </p>
+    <p>تصميم وتطوير بـ ❤️ من <a href="#hero">طارق الفضل</a></p>
+  </footer>
+
+
+  <script>
+    /* ── Scroll Reveal for Timeline ── */
+    const revealItems = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 120);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealItems.forEach(el => observer.observe(el));
+
+    /* ── Nav background on scroll ── */
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 20
+        ? 'rgba(10,11,18,0.97)'
+        : 'rgba(10,11,18,0.85)';
+    });
+
+    /* ── Project card stagger on scroll ── */
+    const cards = document.querySelectorAll('.project-card');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '0';
+          e.target.style.transform = 'translateY(24px)';
+          e.target.style.transition = `opacity 0.5s ${i * 0.06}s, transform 0.5s ${i * 0.06}s`;
+          requestAnimationFrame(() => {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          });
+          cardObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(c => cardObserver.observe(c));
+
+    /* ── Skills stagger ── */
+    const skillCats = document.querySelectorAll('.skill-category');
+    const skillObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '0';
+          e.target.style.transform = 'translateY(20px)';
+          e.target.style.transition = `opacity 0.5s ${i * 0.15}s, transform 0.5s ${i * 0.15}s`;
+          requestAnimationFrame(() => {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          });
+          skillObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    skillCats.forEach(c => skillObs.observe(c));
+  </script>
+
+</body>
+
+</html>
